@@ -1,0 +1,48 @@
+﻿<Window x:Class="CarWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <StackPanel Margin="5">
+        <Label FontSize="20" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">Car Booking</Label>
+        <Label FontSize="15" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">Cars</Label>
+
+        <DataGrid ItemsSource = "{Binding Path=Cars}" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Brand" Binding="{Binding Make}"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel>
+            <Label FontStyle="Italic">Choose Date</Label>
+            <DatePicker Name="DateFilter"/>
+            <Button Click="LoadCarsByDate">Ok</Button>
+            <Button Click="LoadAllCars">Reset</Button>
+        </StackPanel>
+
+        <Label FontSize="15" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">Book a car for a certain day</Label>
+
+        <StackPanel>
+            <Label FontStyle="Italic">Choose Date</Label>
+            <DatePicker SelectedDate="{Binding BookingDate, Mode=TwoWay}" >
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+
+            <TextBlock  Text="CarID: "/>
+            <TextBox Name="SelectCarID" InputScope="Number"/>
+            <Button Click="BookCar">Book</Button>
+        </StackPanel>
+
+        <TextBlock Name="MessageBox"/>
+    </StackPanel>
+</Window>
